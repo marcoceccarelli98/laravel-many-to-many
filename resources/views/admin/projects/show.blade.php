@@ -16,7 +16,14 @@
                 <div class="col-6">
                     <h2 class="text-white">{{ $project['title'] }}</h2>
                     <h3 class="mt-5 text-white">Type : {{ $project->type?->name ?: 'Nessun tipo selezionato' }}</h3>
-
+                    <div class="mt-5 text-white">
+                        <h4>Technologies:</h4>
+                        <ul>
+                            @foreach ($project->technologies as $technology)
+                                <li>{{ $technology->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     <p class="mt-5 text-white">{{ $project['description'] }}</p>
                     <h3 class="mt-5 text-white">Status : {{ $project['status'] }}</h3>
                     <div class="mt-5 d-flex text-white">

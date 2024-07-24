@@ -19,7 +19,9 @@ class ProjectController extends Controller
     public function index()
     {
         $data = [
-            'projects' => Project::all(),
+            // 'projects' => Project::all(),
+
+            'projects' => Project::with('technologies')->get(),
         ];
 
         return view('admin.projects.index', compact('data'));
@@ -64,7 +66,9 @@ class ProjectController extends Controller
     public function show(string $slug)
     {
 
-        $project = Project::where('slug', $slug)->first();
+        // $project = Project::where('slug', $slug)->first();
+
+        $project = Project::where('slug', $slug)->with('technologies')->firstOrFail();
 
         return view('admin.projects.show', compact('project'));
     }
