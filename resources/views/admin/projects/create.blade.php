@@ -35,6 +35,29 @@
                     </select>
                 </div>
 
+                {{-- TECHNOLOGY --}}
+                <div class="form-group">
+                    <label for="technologies">Technologies</label>
+
+                    @foreach ($technologies as $technology)
+                        <input type="checkbox" name="technologies[]" class="btn-check" id="{{}}"
+                            autocomplete="off">
+                        <label class="btn" for="btn-check-4">{{ $technology->name }}</label>
+                    @endforeach
+
+                    <input type="checkbox" class="btn-check" id="btn-check-5" checked autocomplete="off">
+                    <label class="btn" for="btn-check-5">Checked</label>
+
+                    <input type="checkbox" class="btn-check" id="btn-check-6" autocomplete="off" disabled>
+                    <label class="btn" for="btn-check-6">Disabled</label>
+
+                    <select name="technologies[]" id="technologies" class="form-control" multiple>
+                        @foreach ($technologies as $technology)
+                            <option value="{{ $technology->id }}">{{ $technology->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 {{-- DESCRIPTION --}}
                 <div class="text-white mt-3 form-group">
                     <label for="description">Descrizione</label>

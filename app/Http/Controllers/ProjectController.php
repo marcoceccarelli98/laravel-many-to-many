@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
@@ -34,7 +35,9 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -47,14 +50,19 @@ class ProjectController extends Controller
 
         $data = $request->validated();
 
+        //Get images array from string separated by ','
         $data['images'] = array_map('trim', explode(',', $data['images']));
 
-        Log::info('Create Title: ' . $data['title']);
+        //Generate slug from title
         $data['slug'] = Str::slug($data['title'], '-');
-        Log::info('Slug: ' . $data['slug']);
 
 
-        Project::create($data);
+        //Attach technologies to the project
+        $project = Project::create($data);
+
+        if (isset($data['technologies'])) {
+            $project->technologies()->attach($data['technologies']);
+        }
 
         return redirect()->route('home');
     }
@@ -105,6 +113,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+
+
+        // Remove relations many-to-many
+        $project->technologies()->detach();
+
+        //Delete project
         $project->delete();
 
         return redirect()->route('home');

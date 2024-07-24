@@ -29,6 +29,8 @@ class UpdateProjectRequest extends FormRequest
             'start_date' => 'nullable|date|after:1998-10-9',
             'end_date' => 'nullable|date|after:1998-10-9',
             'images' => 'required|string',
+            'technologies' => 'array',
+            'technologies.*' => 'exists:technologies,id'
         ];
     }
 }
