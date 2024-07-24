@@ -37,7 +37,7 @@
 
                     @if (auth()->check())
                         <div class="mt-5">
-                            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-primary mx-2"><i
+                            <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-primary mx-2"><i
                                     class="fas fa-pen"></i></a>
                             <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"
                                 type="submit">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Abort</button>
-                    <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"

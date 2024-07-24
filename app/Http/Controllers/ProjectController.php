@@ -99,9 +99,7 @@ class ProjectController extends Controller
 
         $data['images'] = array_map('trim', explode(',', $data['images']));
 
-        Log::info('Update Title: ' . $data['title']);
         $data['slug'] = Str::slug($data['title'], '-');
-        Log::info('Slug: ' . $data['slug']);
 
         $project->update($data);
 
@@ -113,9 +111,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-
-
-
         // Remove relations many-to-many
         $project->technologies()->detach();
 

@@ -7,6 +7,8 @@
 @section('content')
     <section>
         <div class="container">
+            <h1 class="text-white">Aggiungi un nuovo Progetto</h1>
+
             @if ($errors->any())
                 <div class="mt-5 alert alert-danger">
                     <ul>
@@ -36,10 +38,10 @@
                 </div>
 
                 {{-- TECHNOLOGY --}}
-                <div class="form-group">
+                <div class="mt-3 text-white form-group">
                     <label for="technologies">Technologies</label>
 
-                    @foreach ($technologies as $technology)
+                    {{-- @foreach ($technologies as $technology)
                         <input type="checkbox" name="technologies[]" class="btn-check" id="{{}}"
                             autocomplete="off">
                         <label class="btn" for="btn-check-4">{{ $technology->name }}</label>
@@ -49,7 +51,7 @@
                     <label class="btn" for="btn-check-5">Checked</label>
 
                     <input type="checkbox" class="btn-check" id="btn-check-6" autocomplete="off" disabled>
-                    <label class="btn" for="btn-check-6">Disabled</label>
+                    <label class="btn" for="btn-check-6">Disabled</label> --}}
 
                     <select name="technologies[]" id="technologies" class="form-control" multiple>
                         @foreach ($technologies as $technology)

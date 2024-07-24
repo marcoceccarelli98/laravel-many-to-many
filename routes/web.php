@@ -18,7 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-Route::resource('projects', ProjectController::class);
+//Route::resource('projects', ProjectController::class);
+
+Route::middleware(['auth', 'verified'])
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+
+        // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::resource('projects', ProjectController::class)->parameters(['projects' => 'slug',]);
+    });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
