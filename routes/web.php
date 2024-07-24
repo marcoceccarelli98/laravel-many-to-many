@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
+Route::get('/projects', [PageController::class, 'index'])->name('projects');
+
 //Route::resource('projects', ProjectController::class);
 
 Route::middleware(['auth', 'verified'])
