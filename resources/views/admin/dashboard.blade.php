@@ -28,25 +28,29 @@
             </div>
         </div> --}}
 
-            <table class="mt-3 table text-white">
+            <table class="mt-4 table table-dark table-bordered table-hover table-striped text-white">
                 <thead>
                     <tr>
-                        <th scope="col">#id</th>
+                        <th class="text-center" scope="col">#id</th>
                         <th scope="col">Titolo</th>
                         <th scope="col">Status</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">Operazioni</th>
+                        <th class="px-5 text-end" scope="col">Operazioni</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     @foreach ($projects as $project)
                         {{-- @dd($project->slug) --}}
                         <tr>
-                            <th scope="row">{{ $project->id }}</th>
-                            <td>{{ $project->title }}</td>
-                            <td>{{ $project->status }}</td>
-                            <td>{{ $project->type->name }}</td>
-                            <td>
+                            <th style="width: 5%;" class="text-center lh-40" scope="row">
+                                {{ $project->id }}</th>
+                            <td style="width: 20%;" class="px-4 lh-40">{{ $project->title }}
+                            </td>
+                            <td style="width: 20%;" class="px-4 lh-40">{{ $project->status }}
+                            </td>
+                            <td style="width: 20%;" class="px-4 lh-40">
+                                {{ $project->type->name }}</td>
+                            <td style="width: 35%;" class="px-5 text-end">
                                 {{-- SHOW --}}
                                 <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-primary"><i
                                         class="fas fa-eye"></i></a>
