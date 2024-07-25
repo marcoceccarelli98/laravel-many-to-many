@@ -30,8 +30,7 @@ class StoreProjectRequest extends FormRequest
             'end_date' => 'nullable|date|after:1998-10-9',
             'images' => 'required|string',
             'slug' => 'nullable|string',
-            'technologies' => 'array',
-            'technologies.*' => 'exists:technologies,id'
+            'technologies' => 'nullable|exists:technologies,id',
         ];
     }
 }

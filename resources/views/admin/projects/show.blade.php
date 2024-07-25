@@ -61,7 +61,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Abort</button>
-                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"

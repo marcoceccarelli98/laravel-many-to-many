@@ -49,7 +49,7 @@
                             <td style="width: 20%;" class="px-4 lh-40">{{ $project->status }}
                             </td>
                             <td style="width: 20%;" class="px-4 lh-40">
-                                {{ $project->type->name }}</td>
+                                {{ $project->type?->name ?: 'Nessun tipo selezionato' }}</td>
                             <td style="width: 35%;" class="px-5 text-end">
                                 {{-- SHOW --}}
                                 <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-primary"><i
@@ -76,4 +76,25 @@
 
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are u sure u want to delete : {{ $project->title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Abort</button>
+                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"
+                            type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

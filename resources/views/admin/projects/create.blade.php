@@ -20,6 +20,7 @@
             @endif
             <form class="mt-5" action="{{ route('admin.projects.store') }}" method="POST">
                 @csrf
+
                 {{-- TITLE --}}
                 <div class="text-white form-group">
                     <label for="title">Titolo</label>
@@ -40,26 +41,13 @@
                 {{-- TECHNOLOGY --}}
                 <div class="mt-5 text-white form-group">
                     <label for="technologies">Technologies : </label>
-
                     @foreach ($technologies as $technology)
                         <div class="form-check form-check-inline">
-                            <input type="checkbox" name="technologies" class="text-white btn-check"
-                                id="tech-{{ $technology->id }}" autocomplete="off">
+                            <input type="checkbox" name="technologies[]" class="text-white btn-check"
+                                id="tech-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off">
                             <label class="btn text-white" for="tech-{{ $technology->id }}">{{ $technology->name }}</label>
                         </div>
                     @endforeach
-
-                    {{-- <input type="checkbox" class="btn-check" id="btn-check-5" checked autocomplete="off">
-                    <label class="btn" for="btn-check-5">Checked</label>
-
-                    <input type="checkbox" class="btn-check" id="btn-check-6" autocomplete="off" disabled>
-                    <label class="btn" for="btn-check-6">Disabled</label> --}}
-
-                    {{-- <select name="technologies[]" id="technologies" class="form-control" multiple>
-                        @foreach ($technologies as $technology)
-                            <option value="{{ $technology->id }}">{{ $technology->name }}</option>
-                        @endforeach
-                    </select> --}}
                 </div>
 
                 {{-- DESCRIPTION --}}
@@ -73,15 +61,6 @@
                     <label for="status">Status</label>
                     <input value="WIP" type="text" name="status" id="status" class="form-control" required>
                 </div>
-
-                {{-- <div class="text-white mt-4 form-group">
-                    <label for="status">Status</label>
-                    <select name="status" id="status" class="form-control" required>
-                        <option value="Done" {{ $project->status == 'Done' ? 'selected' : '' }}>Done</option>
-                        <option value="WIP" {{ $project->status == 'WIP' ? 'selected' : '' }}>WIP</option>
-                        <option value="To Do" {{ $project->status == 'To Do' ? 'selected' : '' }}>To Do</option>
-                    </select>
-                </div> --}}
 
                 {{-- START DATE --}}
                 <div class="text-white mt-4 form-group">

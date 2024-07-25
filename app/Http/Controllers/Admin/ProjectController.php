@@ -41,7 +41,6 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
 
-        // dd($request);
 
         $data = $request->validated();
 
@@ -50,6 +49,7 @@ class ProjectController extends Controller
 
         //Generate slug from title
         $data['slug'] = Str::slug($data['title'], '-');
+
 
 
         //Attach technologies to the project
@@ -114,6 +114,6 @@ class ProjectController extends Controller
         //Delete project
         $project->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('admin.dashboard');
     }
 }
