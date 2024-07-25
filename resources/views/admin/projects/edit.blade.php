@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('title')
-    Projects - Edit - {{ $project->id }}
+    Projects - Edit - {{ $project->slug }}
 @endsection
+
 
 @section('content')
     <section>
@@ -16,7 +17,8 @@
                     </ul>
                 </div>
             @endif
-            <form class="mt-5" action="{{ route('projects.update', $project->id) }}" method="POST">
+            <form class="mt-5" action="{{ route('admin.projects.update', $project) }}" method="POST">
+                {{-- <form class="mt-5" action="{{ route('admin.projects.update', $project->slug) }}" method="POST"> --}}
                 @csrf
                 @method('PUT')
                 <div class="text-white form-group">

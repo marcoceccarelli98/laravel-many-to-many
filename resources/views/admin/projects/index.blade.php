@@ -8,14 +8,15 @@
 
 @section('content')
     <section>
-        @if (auth()->check())
-            <div class="add-project">
-                <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">ADD NEW PROJECT</a>
-            </div>
-        @endif
+        {{-- Add new Project --}}
+        <div class="add-project">
+            <a class="btn btn-primary" href="{{ route('admin.projects.create') }}">ADD NEW PROJECT</a>
+        </div>
+
+        <h1 class= "mx-3 py-3 text-white">Admin</h1>
         <div class="container">
             <div class="projects-list">
-                @foreach ($data['projects'] as $project)
+                @foreach ($projects as $project)
                     <div class="project-card">
                         <a href="{{ route('admin.projects.show', $project->slug) }}">
                             <div class="image-container">

@@ -4,6 +4,7 @@
     Project - {{ $project->title }}
 @endsection
 
+
 @section('content')
     <div class="show">
         <div class="mt-5 container">
@@ -37,7 +38,7 @@
 
                     @if (auth()->check())
                         <div class="mt-5">
-                            <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-primary mx-2"><i
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary mx-2"><i
                                     class="fas fa-pen"></i></a>
                             <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger"
                                 type="submit">

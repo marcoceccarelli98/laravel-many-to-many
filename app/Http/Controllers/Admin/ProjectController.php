@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,13 +19,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $data = [
-            // 'projects' => Project::all(),
-
-            'projects' => Project::with('technologies')->get(),
-        ];
-
-        return view('admin.projects.index', compact('data'));
+        $projects = Project::all();
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -71,12 +66,12 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    // public function show(string $slug)
+    public function show(Project $project)
     {
-
         // $project = Project::where('slug', $slug)->first();
 
-        $project = Project::where('slug', $slug)->with('technologies')->firstOrFail();
+        // $project = Project::where('slug', $slug)->with('technologies')->firstOrFail();
 
         return view('admin.projects.show', compact('project'));
     }
@@ -95,15 +90,17 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+
         $data = $request->validated();
 
+        dd($data);
         $data['images'] = array_map('trim', explode(',', $data['images']));
 
         $data['slug'] = Str::slug($data['title'], '-');
 
         $project->update($data);
 
-        return redirect()->route('home');
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully');
     }
 
     /**

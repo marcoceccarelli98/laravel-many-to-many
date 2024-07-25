@@ -10,15 +10,18 @@ class PageController extends Controller
 {
     public function index()
     {
-        $data = [
-            'projects' => Project::all(),
-        ];
-
-        return view('home', compact('data'));
+        return view('home');
     }
 
     public function projects()
     {
-        return view('projects');
+        $projects = Project::with('technologies')->get();
+
+        return view('guest.projects.index', compact('projects'));
+    }
+
+    public function show(Project $project)
+    {
+        return view('guest.projects.show', compact('project'));
     }
 }

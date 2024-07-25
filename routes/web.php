@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Guest\PageController;
-use App\Http\Controllers\ProjectController;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +21,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::get('/projects', [PageController::class, 'projects'])->name('projects');
 
+Route::get('/projects/{project:slug}', [PageController::class, 'show'])->name('projects.show');
 //Route::resource('projects', ProjectController::class);
 
-Route::middleware(['auth', 'verified'])
+Route::middleware('auth') //, 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
 
-        // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::resource('projects', ProjectController::class)->parameters(['projects' => 'slug',]);
+        // admin dashboard
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug',]);
     });
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $projects = Project::all();
+    return view('admin.dashboard', compact('projects'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

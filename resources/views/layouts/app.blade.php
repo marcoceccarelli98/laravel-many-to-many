@@ -46,7 +46,9 @@
                             <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/projects') }}">{{ __('Projects') }}</a>
+                            <a class="nav-link"
+                                @if (auth()->check()) href="{{ url('/admin/projects') }}" @endif
+                                href="{{ url('/projects') }}">{{ __('Projects') }}</a>
                         </li>
                     </ul>
 
