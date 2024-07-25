@@ -37,16 +37,34 @@
                         @endforeach
                     </select>
                 </div>
+
+                {{-- TECHNOLOGY --}}
+                <div class="mt-5 text-white form-group">
+                    <label for="technologies">Technologies : </label>
+                    @foreach ($technologies as $technology)
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" name="technologies[]" class="text-white btn-check"
+                                id="tech-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off"
+                                {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                            <label class="btn text-white" for="tech-{{ $technology->id }}">{{ $technology->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- DESCRIPTION --}}
                 <div class="text-white mt-3 form-group">
                     <label for="description">Descrizione</label>
                     <textarea name="description" id="description" class="form-control" required>{{ old('description', $project->description) }}</textarea>
                 </div>
+
+                {{-- STATUS --}}
                 <div class="text-white mt-3 form-group">
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-control" required>
                         <option value="Done" {{ old('status', $project->status) == 'Done' ? 'selected' : '' }}>Done
                         </option>
-                        <option value="WIP" {{ old('status', $project->status) == 'WIP' ? 'selected' : '' }}>WIP</option>
+                        <option value="WIP" {{ old('status', $project->status) == 'WIP' ? 'selected' : '' }}>WIP
+                        </option>
                         <option value="To Do" {{ old('status', $project->status) == 'To Do' ? 'selected' : '' }}>To Do
                         </option>
                     </select>
@@ -65,6 +83,7 @@
                         </div>
                     @endif
                 @endif
+
                 {{-- IMAGES --}}
                 <div class="text-white mt-3 form-group">
                     <label for="images">URL Immagini (separati da virgola)</label>

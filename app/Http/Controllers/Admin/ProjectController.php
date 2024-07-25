@@ -82,7 +82,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -93,12 +95,16 @@ class ProjectController extends Controller
 
         $data = $request->validated();
 
-        dd($data);
+        // dd($data);
         $data['images'] = array_map('trim', explode(',', $data['images']));
 
         $data['slug'] = Str::slug($data['title'], '-');
 
         $project->update($data);
+
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        }
 
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully');
     }

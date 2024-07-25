@@ -44,7 +44,8 @@
                     @foreach ($technologies as $technology)
                         <div class="form-check form-check-inline">
                             <input type="checkbox" name="technologies[]" class="text-white btn-check"
-                                id="tech-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off">
+                                id="tech-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
                             <label class="btn text-white" for="tech-{{ $technology->id }}">{{ $technology->name }}</label>
                         </div>
                     @endforeach
